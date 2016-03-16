@@ -1,21 +1,16 @@
 <?php
 
-
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
- 
-
-
 
 /**
- *  Partner
- * 
- * @ORM\Table(name="partner")
+ * Category
+ *
  * @ORM\Entity
- * 
+ * @ORM\Table(name="Category")
  */
-class Partner {
+class Category {
     
     
     /**
@@ -30,39 +25,19 @@ class Partner {
     
     /**
      *
-     * @var string 
-     * 
-     * 
-     * @ORM\Column(name="name", type="string")
-     */
-    private $name;
-    
-    /**
-     *
      * @var int
-     *
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="partner") 
      * 
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="categories")
      */
-    private $addresses;
+    private $products;
     
     /**
      *
      * @var string
      * 
-     * 
-     * @ORM\Column(name="bank", type="string")
+     * @ORM\Column(name="name", type="string")
      */
-    private $bank;
-    
-    /**
-     *
-     * @var string 
-     * 
-     * 
-     * @ORM\Column(name="iban", type="string")
-     */
-    private $iban;
+    private $name;
     
     /**
      *
@@ -83,4 +58,4 @@ class Partner {
     private $datCre;
     
     
-}
+}   // end Category

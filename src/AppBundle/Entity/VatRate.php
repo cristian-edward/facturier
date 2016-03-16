@@ -1,68 +1,51 @@
 <?php
 
-
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
- 
-
-
 
 /**
- *  Partner
- * 
- * @ORM\Table(name="partner")
+ * VatRate
+ *
  * @ORM\Entity
- * 
+ * @ORM\Table(name="vat_rate")
  */
-class Partner {
+class VatRate {
     
     
     /**
-     * @var int
      *
+     * @var int
+     * 
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * 
      */
     private $id;
     
     /**
      *
-     * @var string 
+     * @var string
      * 
-     * 
-     * @ORM\Column(name="name", type="string")
+     * @ORM\Column(name="cod", type="string")
      */
-    private $name;
-    
-    /**
-     *
-     * @var int
-     *
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="partner") 
-     * 
-     */
-    private $addresses;
+    private $cod;
     
     /**
      *
      * @var string
      * 
-     * 
-     * @ORM\Column(name="bank", type="string")
+     * @ORM\Column(name="description", type="string")
      */
-    private $bank;
+    private $description;
     
     /**
      *
-     * @var string 
+     * @var float
      * 
-     * 
-     * @ORM\Column(name="iban", type="string")
+     * @ORM\Column(name="rate", type="float")
      */
-    private $iban;
+    private $rate;
     
     /**
      *
@@ -83,4 +66,4 @@ class Partner {
     private $datCre;
     
     
-}
+}   // end VatRate

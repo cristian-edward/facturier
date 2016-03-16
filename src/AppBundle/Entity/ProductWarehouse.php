@@ -1,21 +1,22 @@
 <?php
 
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
- 
-
-
 
 /**
- *  Partner
- * 
- * @ORM\Table(name="partner")
+ * Feature
+ *
  * @ORM\Entity
- * 
+ * @ORM\Table(name="product_warehouse")
  */
-class Partner {
+class ProductWarehouse {
     
     
     /**
@@ -30,39 +31,29 @@ class Partner {
     
     /**
      *
-     * @var string 
+     * @var int
      * 
-     * 
-     * @ORM\Column(name="name", type="string")
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="productWarehouse")
      */
-    private $name;
+    private $product;
+    
     
     /**
      *
      * @var int
-     *
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="partner") 
      * 
+     * @ORM\ManyToOne(targetEntity="Warehouse")
+     * @ORM\JoinColumn(name="warehouse_id", referencedColumnName="id")
      */
-    private $addresses;
+    private $warehouse;
     
     /**
      *
-     * @var string
+     * @var int
      * 
-     * 
-     * @ORM\Column(name="bank", type="string")
+     * @ORM\Column(name="quantity", type="integer")
      */
-    private $bank;
-    
-    /**
-     *
-     * @var string 
-     * 
-     * 
-     * @ORM\Column(name="iban", type="string")
-     */
-    private $iban;
+    private $quantity;
     
     /**
      *
@@ -83,4 +74,4 @@ class Partner {
     private $datCre;
     
     
-}
+}   // end ProductWarehouse

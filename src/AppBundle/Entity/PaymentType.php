@@ -1,21 +1,16 @@
 <?php
 
-
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
- 
-
-
 
 /**
- *  Partner
- * 
- * @ORM\Table(name="partner")
+ * PaymentType
+ *
  * @ORM\Entity
- * 
+ * @ORM\Table(name="payment_type")
  */
-class Partner {
+class PaymentType {
     
     
     /**
@@ -30,39 +25,11 @@ class Partner {
     
     /**
      *
-     * @var string 
-     * 
+     * @var string
      * 
      * @ORM\Column(name="name", type="string")
      */
     private $name;
-    
-    /**
-     *
-     * @var int
-     *
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="partner") 
-     * 
-     */
-    private $addresses;
-    
-    /**
-     *
-     * @var string
-     * 
-     * 
-     * @ORM\Column(name="bank", type="string")
-     */
-    private $bank;
-    
-    /**
-     *
-     * @var string 
-     * 
-     * 
-     * @ORM\Column(name="iban", type="string")
-     */
-    private $iban;
     
     /**
      *
@@ -83,4 +50,4 @@ class Partner {
     private $datCre;
     
     
-}
+}   // end PaymentType

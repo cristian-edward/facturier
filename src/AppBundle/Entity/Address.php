@@ -18,7 +18,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Address {
     
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -92,7 +92,7 @@ class Address {
     
     /**
      *
-     * @var integer
+     * @var int
      * 
      * @ORM\ManyToOne(targetEntity="Partner", inversedBy="addresses") 
      * 
@@ -118,8 +118,4 @@ class Address {
     private $datCre;
     
     
-    
-    
-    
-    
-}
+}   // end Address
