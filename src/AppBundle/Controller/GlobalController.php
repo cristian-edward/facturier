@@ -32,7 +32,7 @@ class GlobalController extends Controller{
      */
     public function forAction(){
         
-        
+
         
        return  $this->render( 'base.html.twig' );
        

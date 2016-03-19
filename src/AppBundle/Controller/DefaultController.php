@@ -15,12 +15,16 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         /* * sa generam un array de test * */ 
-        for($i=0;$i<30;$i++){ 
-            for($j=0;$j<10;$j++){ 
+        for($i=0;$i<=30;$i++){ 
+            for($j=0;$j<8;$j++){ 
             $rez[$i][] ="text $i,$j"; 
             } 
-        } 
-        return $this->render('default/index.html.twig', array( 'entities' => $rez, ));
+        }
+        
+        $capTabel = ['Partner id', 'Alias', 'Street', 'Number', 'City', 'Country', 'Phone', 'Email' ];
+        
+        
+        return $this->render('default/index.html.twig', array( 'entities' => $rez, 'capTabel' => $capTabel));
         
     }
     

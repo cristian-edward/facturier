@@ -5,7 +5,7 @@
     {{ parent() }}
     <h5>Bloc linkuri sablon copil</h5>
     <ul class="nav nav-sidebar">
-        <li><hr /></li>
+    <li><hr style="border: 1px solid black" /></li>   {#  hr line   #}
     <li><a href="#">SubLink1</a></li>
     <li><a href="#">SubLink2</a></li>
     <li><a href="#">SubLink3</a></li>
@@ -18,8 +18,9 @@
     <table class="table table-hover records_list">
         <thead>
             <tr>
-            {% for val in entities[0] %}
+            {% for val in capTabel %}
                 <th>{{ val }}</th>
+                
             {% endfor %}
             </tr>
         </thead>
