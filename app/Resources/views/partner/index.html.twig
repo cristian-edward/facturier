@@ -26,29 +26,30 @@
                 <td>{% if partner.datCre %}{{ partner.datCre|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if partner.datUpd %}{{ partner.datUpd|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>
-                    <ul>
-                        <li>
-                                                             <a class="btn btn-sm btn-info" href="{{ path('client_show', { 'id': entity.id }) }}">
+                    <div class="btn-group">
+                            <a class="btn btn-sm btn-info" href="{{ path('partner_show', { 'id': partner.id }) }}">
                                 <span class="glyphicon glyphicon-share"></span> Arata 
                                 </a>
 
-                                
-                        </li>
-                        <li>
-                            <a class="btn btn-sm btn-default" href="{{ path('client_edit', { 'id': entity.id }) }}">
+                            <a class="btn btn-sm btn-default" href="{{ path('partner_edit', { 'id': partner.id }) }}">
                                 <span class="glyphicon glyphicon-edit"></span> Edit                                
                                 </a>
-                        </li>
-                    </ul>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
         </div>
-    <ul>
+
+{% endblock %}
+
+{% block submenu %}
+    {{ parent() }}
+
         <li>
-            <a href="{{ path('partner_new') }}">Create a new entry</a>
+            <a href="{{ path('partner_new') }}">Create a new partner</a>
         </li>
-    </ul>
+
+
 {% endblock %}

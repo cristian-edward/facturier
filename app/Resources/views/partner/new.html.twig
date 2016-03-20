@@ -1,4 +1,11 @@
 {% extends 'base.html.twig' %}
+{% block submenu %}
+    {{ parent() }}
+
+    <li><a href="{{ path('partner_index') }}">Back to the list</a></li>
+
+{% endblock %}
+
 
 {% block body %}
     <h1>Partner creation</h1>
@@ -23,11 +30,6 @@
     {{ form_end(form) }}
       </div>
   </div>
-    <ul>
-        <li>
-            <a href="{{ path('partner_index') }}">Back to the list</a>
-        </li>
-    </ul>
 
             
 {% endblock %}

@@ -47,7 +47,8 @@
  
             <div class="navbar-collapse collapse clear">
                 {% set d_links = {
-                                'Produse':'product',
+                                'Product' : '',
+                                'Partner' : 'partner',
       
                                 
                                 }
@@ -55,7 +56,7 @@
                 {% block dashboard_links %}
                 <ul class="nav navbar-nav navbar-left"> 
                     {% for key,link in d_links %}
-                        <li><a href="{{ link }}">{{ key }}</a></li>
+                        <li><a href="{{ asset(link) }}">{{ key }}</a></li>
                     {% endfor %}
                     
                 </ul>
@@ -74,8 +75,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
         {% block submenu %}
-          <ul class="nav nav-sidebar">
+
             <li><a href="#">Lista produse</a></li>
             <li><a href="#">Adauga produs nou</a></li>
             <li><a href="#">SubLink3</a></li>
@@ -83,8 +85,9 @@
             
             
             
-          </ul>
+
           {% endblock %}
+            </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             {% block body %}{% endblock %}
