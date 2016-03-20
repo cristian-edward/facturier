@@ -1,79 +1,80 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * Feature
+ * ProductWarehouse
  *
+ * @ORM\Table()
  * @ORM\Entity
- * @ORM\Table(name="product_warehouse")
+ *  
+ * @ORM\HasLifecycleCallbacks()
  */
-class ProductWarehouse {
-    
-    
+class ProductWarehouse
+{
     /**
-     * @var int
+     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * 
      */
-    private $id;
+    private $id;    
+      
     
     /**
+     * @var integer
      *
-     * @var int
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="productWarehouses")
      * 
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="productWarehouse")
-     */
-    private $product;
-    
+     * 
+     */ 
+    private $product;   
     
     /**
+     * @var integer
      *
-     * @var int
-     * 
      * @ORM\ManyToOne(targetEntity="Warehouse")
      * @ORM\JoinColumn(name="warehouse_id", referencedColumnName="id")
-     */
-    private $warehouse;
+     * 
+     */ 
+    private $warehouse;   
     
     /**
+     * @var integer
      *
-     * @var int
+     *  @ORM\Column(name="quantity", type="integer")
      * 
-     * @ORM\Column(name="quantity", type="integer")
-     */
-    private $quantity;
+     */ 
+    private $quantity;     
     
     /**
+     * @var \DateTime
      *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datUpd", type="datetime")
-     */
-    private $datUpd;
-    
-    /**
-     *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datCre", type="datetime")
+     * @ORM\Column(name="dat_cre", type="datetime")
      */
     private $datCre;
-    
-    
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dat_upd", type="datetime")
+     */
+    private $datUpd;    
+        
+    /**
+     * @inheritDoc
+     */
+    public function __toString()
+    {
+        return $this->product;
+    }       
+
+
 
     /**
      * Get id
@@ -110,30 +111,6 @@ class ProductWarehouse {
     }
 
     /**
-     * Set datUpd
-     *
-     * @param \DateTime $datUpd
-     *
-     * @return ProductWarehouse
-     */
-    public function setDatUpd($datUpd)
-    {
-        $this->datUpd = $datUpd;
-
-        return $this;
-    }
-
-    /**
-     * Get datUpd
-     *
-     * @return \DateTime
-     */
-    public function getDatUpd()
-    {
-        return $this->datUpd;
-    }
-
-    /**
      * Set datCre
      *
      * @param \DateTime $datCre
@@ -155,6 +132,30 @@ class ProductWarehouse {
     public function getDatCre()
     {
         return $this->datCre;
+    }
+
+    /**
+     * Set datUpd
+     *
+     * @param \DateTime $datUpd
+     *
+     * @return ProductWarehouse
+     */
+    public function setDatUpd($datUpd)
+    {
+        $this->datUpd = $datUpd;
+
+        return $this;
+    }
+
+    /**
+     * Get datUpd
+     *
+     * @return \DateTime
+     */
+    public function getDatUpd()
+    {
+        return $this->datUpd;
     }
 
     /**

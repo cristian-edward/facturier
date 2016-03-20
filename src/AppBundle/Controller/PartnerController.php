@@ -38,7 +38,6 @@ class PartnerController extends Controller
         $form = $this->createForm(PartnerType::class, $partner, [
             'method' => 'GET',    /* Set form method */
             'action' => $this->generateUrl('partner_new'),
-
         ]);
         $form->handleRequest($request);
 

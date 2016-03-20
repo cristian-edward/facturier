@@ -3,70 +3,73 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Feature
  *
+ * @ORM\Table()
  * @ORM\Entity
- * @ORM\Table(name="feature")
+ * 
  */
-class Feature {
-    
-    
+class Feature
+{
     /**
-     * @var int
+     * 
+     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * 
      */
-    private $id;
+    private $id;       
     
     /**
-     *
-     * @var int 
      * 
-     * @ORM\ManyToMany(targetEntity="Product", mappedBy="images") 
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="features")
+     * 
      */
-    private $products;
+    private $products;         
     
     /**
      *
-     * @var int
-     * 
      * @ORM\ManyToOne(targetEntity="FeatureName")
      * @ORM\JoinColumn(name="name_id", referencedColumnName="id")
+     * 
      */
-    private $name;
+    private $name;   
     
     /**
-     *
      * @var string
-     * 
-     * @ORM\Column(name="value", type="string")
+     *
+     * @ORM\Column(name="f_value", type="string", nullable=true)
      */
     private $value;
     
     /**
+     * @var \DateTime
      *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datUpd", type="datetime")
-     */
-    private $datUpd;
-    
-    /**
-     *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datCre", type="datetime")
+     * @ORM\Column(name="dat_cre", type="datetime")
      */
     private $datCre;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dat_upd", type="datetime")
+     */
+    private $datUpd;     
     
-    
+    /**
+     * 
+     */
+    public function __toString()
+    {        
+        return $this->value;
+    }    
+
     /**
      * Constructor
      */
@@ -110,30 +113,6 @@ class Feature {
     }
 
     /**
-     * Set datUpd
-     *
-     * @param \DateTime $datUpd
-     *
-     * @return Feature
-     */
-    public function setDatUpd($datUpd)
-    {
-        $this->datUpd = $datUpd;
-
-        return $this;
-    }
-
-    /**
-     * Get datUpd
-     *
-     * @return \DateTime
-     */
-    public function getDatUpd()
-    {
-        return $this->datUpd;
-    }
-
-    /**
      * Set datCre
      *
      * @param \DateTime $datCre
@@ -155,6 +134,30 @@ class Feature {
     public function getDatCre()
     {
         return $this->datCre;
+    }
+
+    /**
+     * Set datUpd
+     *
+     * @param \DateTime $datUpd
+     *
+     * @return Feature
+     */
+    public function setDatUpd($datUpd)
+    {
+        $this->datUpd = $datUpd;
+
+        return $this;
+    }
+
+    /**
+     * Get datUpd
+     *
+     * @return \DateTime
+     */
+    public function getDatUpd()
+    {
+        return $this->datUpd;
     }
 
     /**

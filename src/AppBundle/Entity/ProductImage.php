@@ -3,69 +3,72 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * ProductImage
  *
+ * @ORM\Table()
  * @ORM\Entity
- * @ORM\Table(name="product_image")
+ * 
+ * 
  */
-class ProductImage {
-    
-    
+class ProductImage
+{
     /**
-     * @var int
+     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * 
      */
-    private $id;
-    
-    /**
-     *
-     * @var int 
-     * 
-     * @ORM\ManyToMany(targetEntity="Product", mappedBy="images") 
-     */
-    private $products;
-    
-    /**
-     *
-     * @var string
-     * 
-     * @ORM\Column(name="name", type="string")
-     */
-    private $name;
-    
-    /**
-     *
-     * @var string
-     * 
-     * @ORM\Column(name="path", type="string")
-     */
-    private $path;
+    private $id;    
 
     /**
-     *
-     * @var \DateTime 
      * 
+     * @ORM\ManyToMany(targetEntity="Product", inversedBy="images")
      * 
-     * @ORM\Column(name="datUpd", type="datetime")
      */
-    private $datUpd;
+    private $products;    
+   
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", nullable=true)
+     */
+    private $name;     
     
     /**
+     * @var string
      *
-     * @var \DateTime 
+     * @ORM\Column(name="path", type="string", nullable=true)
+     */
+    private $path;  
+        
+    /**
+     * @var \DateTime
      * 
-     * 
-     * @ORM\Column(name="datCre", type="datetime")
+     * @ORM\Column(name="dat_cre", type="datetime")
      */
     private $datCre;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dat_upd", type="datetime")
+     */
+    private $datUpd;    
     
+    /**
+     * @inheritDoc
+     */
+    public function __toString()
+    {
+        return $this->reference;
+    }    
     
+ 
     /**
      * Constructor
      */
@@ -133,30 +136,6 @@ class ProductImage {
     }
 
     /**
-     * Set datUpd
-     *
-     * @param \DateTime $datUpd
-     *
-     * @return ProductImage
-     */
-    public function setDatUpd($datUpd)
-    {
-        $this->datUpd = $datUpd;
-
-        return $this;
-    }
-
-    /**
-     * Get datUpd
-     *
-     * @return \DateTime
-     */
-    public function getDatUpd()
-    {
-        return $this->datUpd;
-    }
-
-    /**
      * Set datCre
      *
      * @param \DateTime $datCre
@@ -178,6 +157,30 @@ class ProductImage {
     public function getDatCre()
     {
         return $this->datCre;
+    }
+
+    /**
+     * Set datUpd
+     *
+     * @param \DateTime $datUpd
+     *
+     * @return ProductImage
+     */
+    public function setDatUpd($datUpd)
+    {
+        $this->datUpd = $datUpd;
+
+        return $this;
+    }
+
+    /**
+     * Get datUpd
+     *
+     * @return \DateTime
+     */
+    public function getDatUpd()
+    {
+        return $this->datUpd;
     }
 
     /**

@@ -20,7 +20,9 @@ class PartnerType extends AbstractType
             ->add('bank')
             ->add('iban')
 
-//            ->add('datUpd', HiddenType::class)
+ //           ->add('datUpd', 'date', array(
+                'widget'
+            ))
 //            ->add('datCre', 'datetime')
         ;
     }

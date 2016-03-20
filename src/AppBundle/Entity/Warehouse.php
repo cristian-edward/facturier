@@ -3,60 +3,60 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Warehouse
  *
+ * @ORM\Table()
  * @ORM\Entity
- * @ORM\Table(name="warehouse")
+ * @UniqueEntity("name")
+ * 
+ * 
  */
-class Warehouse {
-    
-    
+class Warehouse
+{
     /**
-     * @var int
+     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * 
      */
-    private $id;
+    private $id;    
+      
     
     /**
-     *
      * @var string
+     *
+     * @ORM\Column(name="name", type="string")
      * 
-     * @ORM\Column(name="name", type="string") 
      */
-    private $name;
+    private $name;      
+    
     
     /**
-     *
-     * @var string
-     * 
-     * @ORM\Column(name="address", type="string")
+     * @inheritDoc
      */
-    private $address;
-    
+    public function __toString()
+    {
+        return $this->name;
+    }       
+
     /**
+     * @var \DateTime
      *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datUpd", type="datetime")
-     */
-    private $datUpd;
-    
-    /**
-     *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datCre", type="datetime")
+     * @ORM\Column(name="dat_cre", type="datetime")
      */
     private $datCre;
-    
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dat_upd", type="datetime")
+     */
+    private $datUpd;    
     
 
     /**
@@ -94,27 +94,27 @@ class Warehouse {
     }
 
     /**
-     * Set address
+     * Set datCre
      *
-     * @param string $address
+     * @param \DateTime $datCre
      *
      * @return Warehouse
      */
-    public function setAddress($address)
+    public function setDatCre($datCre)
     {
-        $this->address = $address;
+        $this->datCre = $datCre;
 
         return $this;
     }
 
     /**
-     * Get address
+     * Get datCre
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getAddress()
+    public function getDatCre()
     {
-        return $this->address;
+        return $this->datCre;
     }
 
     /**
@@ -139,29 +139,5 @@ class Warehouse {
     public function getDatUpd()
     {
         return $this->datUpd;
-    }
-
-    /**
-     * Set datCre
-     *
-     * @param \DateTime $datCre
-     *
-     * @return Warehouse
-     */
-    public function setDatCre($datCre)
-    {
-        $this->datCre = $datCre;
-
-        return $this;
-    }
-
-    /**
-     * Get datCre
-     *
-     * @return \DateTime
-     */
-    public function getDatCre()
-    {
-        return $this->datCre;
     }
 }

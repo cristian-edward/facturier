@@ -1,88 +1,75 @@
 <?php
 
-
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
- 
-
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- *  Partner
- * 
- * @ORM\Table(name="partner")
+ * Partner
+ *
+ * @ORM\Table()
  * @ORM\Entity
+ * @UniqueEntity("name")
+ * @ORM\HasLifecycleCallbacks()
  * 
  */
-class Partner {
-    
-    
+class Partner
+{
     /**
-     * @var int
+     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * 
      */
-    private $id;
+    private $id;      
     
     /**
+     * @var string
      *
-     * @var string 
-     * 
-     * 
      * @ORM\Column(name="name", type="string")
      */
-    private $name;
+    private $name;       
     
     /**
+     * @var integer
      *
-     * @var int
+     * @ORM\OneToMany(targetEntity="Address", mappedBy="partner")
      *
-     * @ORM\OneToMany(targetEntity="Address", mappedBy="partner") 
-     * 
      */
-    private $addresses;
+    private $addresses;     
     
     /**
-     *
      * @var string
+     *
+     * @ORM\Column(name="bank", type="string", nullable=true)
      * 
-     * 
-     * @ORM\Column(name="bank", type="string")
      */
-    private $bank;
+    private $bank;    
     
     /**
+     * @var string
      *
-     * @var string 
+     * @ORM\Column(name="iban", type="string", nullable=true)
      * 
-     * 
-     * @ORM\Column(name="iban", type="string")
      */
-    private $iban;
+    private $iban;      
     
     /**
+     * @var \DateTime
      *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datUpd", type="datetime")
-     */
-    private $datUpd;
-    
-    /**
-     *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datCre", type="datetime")
+     * @ORM\Column(name="dat_cre", type="datetime")
      */
     private $datCre;
-    
-    
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dat_upd", type="datetime")
+     */
+    private $datUpd;    
+
     /**
      * Constructor
      */
@@ -174,36 +161,11 @@ class Partner {
     }
 
     /**
-     * Set datUpd
-     * @ORM\PreUpdate
-     * @ORM\PrePersist
-     * @param \DateTime $datUpd
-     *
-     * @return Product
-     */
-    public function setDatUpd()
-    {
-        $this->datUpd = new \DateTime();
-
-        return $this;
-    }
-
-    /**
-     * Get datUpd
-     *
-     * @return \DateTime
-     */
-    public function getDatUpd()
-    {
-        return $this->datUpd;
-    }
-
-    /**
      * Set datCre
      * @ORM\PrePersist
      * @param \DateTime $datCre
      *
-     * @return Product
+     * @return Partner
      */
     public function setDatCre()
     {
@@ -220,6 +182,33 @@ class Partner {
     public function getDatCre()
     {
         return $this->datCre;
+    }
+
+    /**
+     * Set datUpd
+     *
+     * @ORM\PreUpdate
+     * @ORM\PrePersist
+     * 
+     * @param \DateTime $datUpd
+     *
+     * @return Partner
+     */
+    public function setDatUpd()
+    {
+        $this->datUpd = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get datUpd
+     *
+     * @return \DateTime
+     */
+    public function getDatUpd()
+    {
+        return $this->datUpd;
     }
 
     /**

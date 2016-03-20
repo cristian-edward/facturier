@@ -4,7 +4,7 @@
     <h1>Partner creation</h1>
   <div class="row">
       <div class="col-xs-4">
-    {{ form_start(form, { 'attr':{ 'role': 'form'} }) }}
+    {{ form_start(form, { 'attr':{ 'role': 'form' } }) }}
     <div class="form-group">    {# Input NAME #}
         {{ form_label(form.name, 'Name', { 'label_attr':{'class': 'col-md-1 col-sm-2 control-label'} } )}}
         {{ form_widget(form.name, { 'attr':{ 'class': 'form-control'} }) }}
@@ -28,6 +28,6 @@
             <a href="{{ path('partner_index') }}">Back to the list</a>
         </li>
     </ul>
-            
+
             
 {% endblock %}

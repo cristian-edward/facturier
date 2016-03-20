@@ -1,123 +1,82 @@
 <?php
 
-
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
- 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
-
 /**
- *  Address
+ * Address
  * 
  * @ORM\Table(name="address")
- * @ORM\Entity
- * @UniqueEntity("nume")
+ * @ORM\Entity()
+ * @UniqueEntity("alias")
  */
-class Address {
-    
+class Address
+{
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
+     * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
-     * 
      */
     private $id;
-    
+
     /**
-     *
-     * @var string 
-     * 
-     * 
-     * @ORM\Column(name="alias", type="string")
+     * @ORM\Column(name="alias", type="string", length=30)
      */
     private $alias;
-    
+
     /**
-     *
-     * @var string
-     * 
-     * 
      * @ORM\Column(name="street", type="string")
      */
     private $street;
     
     /**
-     *
-     * @var integer 
-     * 
-     * 
-     * @ORM\Column(name="no", type="integer")
+     * @ORM\Column(name="no", type="string")
      */
-    private $no;
+    private $no;    
     
     /**
-     *
-     * @var string 
-     * 
-     * 
      * @ORM\Column(name="city", type="string")
      */
-    private $city;
+    private $city;    
     
     /**
-     *
-     * @var string 
-     * 
-     * 
      * @ORM\Column(name="country", type="string")
      */
-    private $country;
+    private $country;    
     
     /**
-     *
-     * @var string 
-     * 
-     * 
-     * @ORM\Column(name="phone", type="string")
-     */
-    private $phone;
-    
-    /**
-     *
-     * @var string 
-     * 
-     * 
      * @ORM\Column(name="email", type="string")
      */
     private $email;
     
     /**
-     *
-     * @var int
-     * 
-     * @ORM\ManyToOne(targetEntity="Partner", inversedBy="addresses") 
-     * 
+     * @ORM\Column(name="phone", type="string")
      */
-    private $partner;
+    private $phone;    
+  
+    /**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="Partner", inversedBy="addresses")
+     *
+     */
+    private $partner;   
     
     /**
+     * @var \DateTime
      *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datUpd", type="datetime")
-     */
-    private $datUpd;
-    
-    /**
-     *
-     * @var \DateTime  
-     * 
-     * 
-     * @ORM\Column(name="datCre", type="datetime")
+     * @ORM\Column(name="dat_cre", type="datetime")
      */
     private $datCre;
-    
-    
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dat_upd", type="datetime")
+     */
+    private $datUpd;  
+
 
     /**
      * Get id
@@ -180,7 +139,7 @@ class Address {
     /**
      * Set no
      *
-     * @param integer $no
+     * @param string $no
      *
      * @return Address
      */
@@ -194,7 +153,7 @@ class Address {
     /**
      * Get no
      *
-     * @return integer
+     * @return string
      */
     public function getNo()
     {
@@ -250,30 +209,6 @@ class Address {
     }
 
     /**
-     * Set phone
-     *
-     * @param string $phone
-     *
-     * @return Address
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
      * Set email
      *
      * @param string $email
@@ -298,27 +233,27 @@ class Address {
     }
 
     /**
-     * Set datUpd
+     * Set phone
      *
-     * @param \DateTime $datUpd
+     * @param string $phone
      *
      * @return Address
      */
-    public function setDatUpd($datUpd)
+    public function setPhone($phone)
     {
-        $this->datUpd = $datUpd;
+        $this->phone = $phone;
 
         return $this;
     }
 
     /**
-     * Get datUpd
+     * Get phone
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getDatUpd()
+    public function getPhone()
     {
-        return $this->datUpd;
+        return $this->phone;
     }
 
     /**
@@ -343,6 +278,30 @@ class Address {
     public function getDatCre()
     {
         return $this->datCre;
+    }
+
+    /**
+     * Set datUpd
+     *
+     * @param \DateTime $datUpd
+     *
+     * @return Address
+     */
+    public function setDatUpd($datUpd)
+    {
+        $this->datUpd = $datUpd;
+
+        return $this;
+    }
+
+    /**
+     * Get datUpd
+     *
+     * @return \DateTime
+     */
+    public function getDatUpd()
+    {
+        return $this->datUpd;
     }
 
     /**

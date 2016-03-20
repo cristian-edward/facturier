@@ -7,85 +7,75 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * DocumentLine
  *
+ * @ORM\Table()
  * @ORM\Entity
- * @ORM\Table(name="document_line")
+ * @ORM\HasLifecycleCallbacks()
  */
-class DocumentLine {
-    
-    
+class DocumentLine
+{
     /**
-     * @var int
+     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * 
      */
-    private $id;
+    private $id;    
     
     /**
+     * @var integer
      *
-     * @var int
-     * 
      * @ORM\ManyToOne(targetEntity="Product")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
-    private $product;
+    private $product;       
     
     /**
+     * @var decimal
      *
-     * @var int
-     * 
-     * @ORM\Column(name="quantity", type="integer")
+     * @ORM\Column(name="quantity", type="decimal", precision=10, scale=2, nullable=true)
      */
-    private $quantity;
+    private $quantity;      
     
     /**
+     * @var decimal
      *
-     * @var float
-     * 
-     * @ORM\Column(name="sale_price", type="float")
+     * @ORM\Column(name="sale_price", type="decimal", precision=16, scale=6, nullable=true)
      */
-    private $salePrice;
-    
+    private $salePrice;     
+     
     /**
+     * @var integer
      *
-     * @var int
-     * 
      * @ORM\ManyToOne(targetEntity="Document", inversedBy="documentLines")
-     * @ORM\JoinColumn(name="document_id", referencedColumnName="id")
+     * 
      */
-    private $document;
-    
+    private $document;    
     
     /**
+     * @var integer
      *
-     * @var int
-     * 
      * @ORM\ManyToOne(targetEntity="VatRate")
-     * @ORM\JoinColumn(name="vat_rate_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="vatrate_id", referencedColumnName="id")
      */
-    private $vatRate;
+    private $vatRate;        
+    
     
     /**
+     * @var \DateTime
      *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datUpd", type="datetime")
-     */
-    private $datUpd;
-    
-    /**
-     *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datCre", type="datetime")
+     * @ORM\Column(name="dat_cre", type="datetime")
      */
     private $datCre;
-    
-    
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dat_upd", type="datetime")
+     */
+    private $datUpd;    
+
+  
 
     /**
      * Get id
@@ -100,7 +90,7 @@ class DocumentLine {
     /**
      * Set quantity
      *
-     * @param integer $quantity
+     * @param string $quantity
      *
      * @return DocumentLine
      */
@@ -114,7 +104,7 @@ class DocumentLine {
     /**
      * Get quantity
      *
-     * @return integer
+     * @return string
      */
     public function getQuantity()
     {
@@ -124,7 +114,7 @@ class DocumentLine {
     /**
      * Set salePrice
      *
-     * @param float $salePrice
+     * @param string $salePrice
      *
      * @return DocumentLine
      */
@@ -138,35 +128,11 @@ class DocumentLine {
     /**
      * Get salePrice
      *
-     * @return float
+     * @return string
      */
     public function getSalePrice()
     {
         return $this->salePrice;
-    }
-
-    /**
-     * Set datUpd
-     *
-     * @param \DateTime $datUpd
-     *
-     * @return DocumentLine
-     */
-    public function setDatUpd($datUpd)
-    {
-        $this->datUpd = $datUpd;
-
-        return $this;
-    }
-
-    /**
-     * Get datUpd
-     *
-     * @return \DateTime
-     */
-    public function getDatUpd()
-    {
-        return $this->datUpd;
     }
 
     /**
@@ -191,6 +157,30 @@ class DocumentLine {
     public function getDatCre()
     {
         return $this->datCre;
+    }
+
+    /**
+     * Set datUpd
+     *
+     * @param \DateTime $datUpd
+     *
+     * @return DocumentLine
+     */
+    public function setDatUpd($datUpd)
+    {
+        $this->datUpd = $datUpd;
+
+        return $this;
+    }
+
+    /**
+     * Get datUpd
+     *
+     * @return \DateTime
+     */
+    public function getDatUpd()
+    {
+        return $this->datUpd;
     }
 
     /**

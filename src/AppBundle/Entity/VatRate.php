@@ -3,69 +3,63 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * VatRate
  *
+ * @ORM\Table()
  * @ORM\Entity
- * @ORM\Table(name="vat_rate")
+ * @UniqueEntity("code")
+ * 
  */
-class VatRate {
-    
-    
+class VatRate
+{
     /**
+     * @var integer
      *
-     * @var int
-     * 
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $id;      
     
     /**
-     *
      * @var string
-     * 
-     * @ORM\Column(name="cod", type="string")
+     *
+     * @ORM\Column(name="code", type="string")
      */
-    private $cod;
+    private $code;    
     
     /**
-     *
      * @var string
-     * 
+     *
      * @ORM\Column(name="description", type="string")
      */
-    private $description;
+    private $description;    
     
     /**
+     * @var decimal
      *
-     * @var float
-     * 
-     * @ORM\Column(name="rate", type="float")
+     * @ORM\Column(name="rate", type="decimal", precision=16, scale=6)
      */
-    private $rate;
+    private $rate;       
     
     /**
+     * @var \DateTime
      *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datUpd", type="datetime")
-     */
-    private $datUpd;
-    
-    /**
-     *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datCre", type="datetime")
+     * @ORM\Column(name="dat_cre", type="datetime")
      */
     private $datCre;
-    
-    
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dat_upd", type="datetime")
+     */
+    private $datUpd;    
+      
+
 
     /**
      * Get id
@@ -78,27 +72,27 @@ class VatRate {
     }
 
     /**
-     * Set cod
+     * Set code
      *
-     * @param string $cod
+     * @param string $code
      *
      * @return VatRate
      */
-    public function setCod($cod)
+    public function setCode($code)
     {
-        $this->cod = $cod;
+        $this->code = $code;
 
         return $this;
     }
 
     /**
-     * Get cod
+     * Get code
      *
      * @return string
      */
-    public function getCod()
+    public function getCode()
     {
-        return $this->cod;
+        return $this->code;
     }
 
     /**
@@ -128,7 +122,7 @@ class VatRate {
     /**
      * Set rate
      *
-     * @param float $rate
+     * @param string $rate
      *
      * @return VatRate
      */
@@ -142,35 +136,11 @@ class VatRate {
     /**
      * Get rate
      *
-     * @return float
+     * @return string
      */
     public function getRate()
     {
         return $this->rate;
-    }
-
-    /**
-     * Set datUpd
-     *
-     * @param \DateTime $datUpd
-     *
-     * @return VatRate
-     */
-    public function setDatUpd($datUpd)
-    {
-        $this->datUpd = $datUpd;
-
-        return $this;
-    }
-
-    /**
-     * Get datUpd
-     *
-     * @return \DateTime
-     */
-    public function getDatUpd()
-    {
-        return $this->datUpd;
     }
 
     /**
@@ -195,5 +165,29 @@ class VatRate {
     public function getDatCre()
     {
         return $this->datCre;
+    }
+
+    /**
+     * Set datUpd
+     *
+     * @param \DateTime $datUpd
+     *
+     * @return VatRate
+     */
+    public function setDatUpd($datUpd)
+    {
+        $this->datUpd = $datUpd;
+
+        return $this;
+    }
+
+    /**
+     * Get datUpd
+     *
+     * @return \DateTime
+     */
+    public function getDatUpd()
+    {
+        return $this->datUpd;
     }
 }

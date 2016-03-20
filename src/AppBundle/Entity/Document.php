@@ -3,108 +3,97 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Document
  *
+ * @ORM\Table()
  * @ORM\Entity
- * @ORM\Table(name="document")
+ * @UniqueEntity("docNumber")
+ * @ORM\HasLifecycleCallbacks()
  */
-class Document {
-    
-    
+class Document
+{
     /**
-     * @var int
+     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * 
      */
-    private $id;
+    private $id;    
     
     /**
+     * @var integer
      *
-     * @var int
-     * 
      * @ORM\ManyToOne(targetEntity="Partner")
      * @ORM\JoinColumn(name="partner_id", referencedColumnName="id")
      */
-    private $partner;
+    private $partner;  
     
     /**
+     * @var integer
      *
-     * @var int
-     * 
      * @ORM\ManyToOne(targetEntity="DocType")
-     * @ORM\JoinColumn(name="doc_type_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="doctype_id", referencedColumnName="id")
      */
-    private $docType;
+    private $docType;     
     
     /**
+     * @var integer
      *
-     * @var int
-     * 
      * @ORM\ManyToOne(targetEntity="PaymentType")
-     * @ORM\JoinColumn(name="payment_type_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="paymenttype_id", referencedColumnName="id")
      */
-    private $paymentType;
-    
+    private $paymentType;       
     
     /**
+     * @var integer
      *
-     * @var int
-     * 
-     * 
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $user;
+    private $user;     
     
     /**
+     * @var integer
      *
-     * @var int
-     * 
      * @ORM\OneToMany(targetEntity="DocumentLine", mappedBy="document")
-     */
-    private $documentLines;
-    
-    
-    /**
-     *
-     * @var string
      * 
+     */
+    private $documentLines;  
+    
+     /**
+     * @var string
+     *
      * @ORM\Column(name="doc_number", type="string")
      */
-    private $docNumber;
+    private $docNumber;   
     
     /**
+     * @var integer
      *
-     * @var string
-     * 
      * @ORM\ManyToOne(targetEntity="DocStatus")
-     * @ORM\JoinColumn(name="doc_status_id", referencedColumnName="id")
+     * 
      */
-    private $docStatus;
-
+    private $docStatus;       
     
     /**
+     * @var \DateTime
      *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datUpd", type="datetime")
-     */
-    private $datUpd;
-    
-    /**
-     *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datCre", type="datetime")
+     * @ORM\Column(name="dat_cre", type="datetime")
      */
     private $datCre;
-    
-    
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dat_upd", type="datetime")
+     */
+    private $datUpd;    
+
+ 
     /**
      * Constructor
      */
@@ -148,30 +137,6 @@ class Document {
     }
 
     /**
-     * Set datUpd
-     *
-     * @param \DateTime $datUpd
-     *
-     * @return Document
-     */
-    public function setDatUpd($datUpd)
-    {
-        $this->datUpd = $datUpd;
-
-        return $this;
-    }
-
-    /**
-     * Get datUpd
-     *
-     * @return \DateTime
-     */
-    public function getDatUpd()
-    {
-        return $this->datUpd;
-    }
-
-    /**
      * Set datCre
      *
      * @param \DateTime $datCre
@@ -193,6 +158,30 @@ class Document {
     public function getDatCre()
     {
         return $this->datCre;
+    }
+
+    /**
+     * Set datUpd
+     *
+     * @param \DateTime $datUpd
+     *
+     * @return Document
+     */
+    public function setDatUpd($datUpd)
+    {
+        $this->datUpd = $datUpd;
+
+        return $this;
+    }
+
+    /**
+     * Get datUpd
+     *
+     * @return \DateTime
+     */
+    public function getDatUpd()
+    {
+        return $this->datUpd;
     }
 
     /**
@@ -265,6 +254,30 @@ class Document {
     public function getPaymentType()
     {
         return $this->paymentType;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Document
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 
     /**

@@ -3,53 +3,53 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Feature
+ * FeatureName
  *
+ * @ORM\Table()
  * @ORM\Entity
- * @ORM\Table(name="feature_name")
+ * 
  */
-class FeatureName {
-    
-    
+class FeatureName
+{
     /**
-     * @var int
+     * @var integer
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * 
      */
-    private $id;
-    
+    private $id;       
+
     /**
-     *
      * @var string
-     * 
-     * @ORM\Column(name="value", type="string")
+     *
+     * @ORM\Column(name="fn_value", type="string", nullable=true)
      */
-    private $value;
+    private $fnValue;           
     
     /**
+     * @var \DateTime
      *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datUpd", type="datetime")
-     */
-    private $datUpd;
-    
-    /**
-     *
-     * @var \DateTime 
-     * 
-     * 
-     * @ORM\Column(name="datCre", type="datetime")
+     * @ORM\Column(name="dat_cre", type="datetime")
      */
     private $datCre;
-    
-    
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dat_upd", type="datetime")
+     */
+    private $datUpd;     
+   
+   public function __toString(){
+       return (string)$this->getEn();
+   }
+   
 
     /**
      * Get id
@@ -62,51 +62,99 @@ class FeatureName {
     }
 
     /**
-     * Set value
+     * Set en
      *
-     * @param string $value
+     * @param string $en
      *
      * @return FeatureName
      */
-    public function setValue($value)
+    public function setEn($en)
     {
-        $this->value = $value;
+        $this->en = $en;
 
         return $this;
     }
 
     /**
-     * Get value
+     * Get en
      *
      * @return string
      */
-    public function getValue()
+    public function getEn()
     {
-        return $this->value;
+        return $this->en;
     }
 
     /**
-     * Set datUpd
+     * Set ro
      *
-     * @param \DateTime $datUpd
+     * @param string $ro
      *
      * @return FeatureName
      */
-    public function setDatUpd($datUpd)
+    public function setRo($ro)
     {
-        $this->datUpd = $datUpd;
+        $this->ro = $ro;
 
         return $this;
     }
 
     /**
-     * Get datUpd
+     * Get ro
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getDatUpd()
+    public function getRo()
     {
-        return $this->datUpd;
+        return $this->ro;
+    }
+
+    /**
+     * Set bg
+     *
+     * @param string $bg
+     *
+     * @return FeatureName
+     */
+    public function setBg($bg)
+    {
+        $this->bg = $bg;
+
+        return $this;
+    }
+
+    /**
+     * Get bg
+     *
+     * @return string
+     */
+    public function getBg()
+    {
+        return $this->bg;
+    }
+
+    /**
+     * Set fnValue
+     *
+     * @param string $fnValue
+     *
+     * @return FeatureName
+     */
+    public function setFnValue($fnValue)
+    {
+        $this->fnValue = $fnValue;
+
+        return $this;
+    }
+
+    /**
+     * Get fnValue
+     *
+     * @return string
+     */
+    public function getFnValue()
+    {
+        return $this->fnValue;
     }
 
     /**
@@ -131,5 +179,29 @@ class FeatureName {
     public function getDatCre()
     {
         return $this->datCre;
+    }
+
+    /**
+     * Set datUpd
+     *
+     * @param \DateTime $datUpd
+     *
+     * @return FeatureName
+     */
+    public function setDatUpd($datUpd)
+    {
+        $this->datUpd = $datUpd;
+
+        return $this;
+    }
+
+    /**
+     * Get datUpd
+     *
+     * @return \DateTime
+     */
+    public function getDatUpd()
+    {
+        return $this->datUpd;
     }
 }
