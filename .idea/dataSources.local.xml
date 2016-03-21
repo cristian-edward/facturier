@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="MySQL - facturier@localhost" uuid="13a8357a-0c6c-415e-a996-36b5a779f727">
-      <secret-storage>master_key</secret-storage>
-      <user-name>root</user-name>
-      <schema-pattern>facturier.*</schema-pattern>
-      <default-schemas>facturier.*</default-schemas>
-    </data-source>
+    <data-source name="MySQL - facturier@localhost" uuid="13a8357a-0c6c-415e-a996-36b5a779f727" />
   </component>
 </project>
