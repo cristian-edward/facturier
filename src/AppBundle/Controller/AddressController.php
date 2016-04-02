@@ -42,7 +42,10 @@ class AddressController extends Controller
         $address = new Address();
         $form = $this->createForm('AppBundle\Form\AddressType', $address);
         /* Adaug aici butonul de submit */
-        $form->add('submit', SubmitType::class);
+        $form->add('submit', SubmitType::class,
+            array('attr' => ['class'=>'btn btn-primary'],
+                'label'=>'Trimite',
+            ));
 
         $form->handleRequest($request);
 
