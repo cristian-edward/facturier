@@ -9,9 +9,9 @@
 {% block body %}
     <h1>Address list</h1>
 
-<div class="table-responsive">
-    <table class="table table-hover records_list">
-        <thead>
+    <div class="table-responsive">
+        <table class="table table-hover records_list">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Alias</th>
@@ -26,36 +26,36 @@
                 <th>Datupd</th>
                 <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for address in addresses %}
-            <tr>
-                <td><a href="{{ path('address_show', { 'id': address.id }) }}">{{ address.id }}</a></td>
-                <td>{{ address.alias }}</td>
-                <td>{{ address.street }}</td>
-                <td>{{ address.no }}</td>
-                <td>{{ address.city }}</td>
-                <td>{{ address.country }}</td>
-                <td>{{ address.email }}</td>
-                <td>{{ address.phone }}</td>                
-                <td>
-                    <a href="{% if address.partner.id is defined %} {{ path('partner_show', { 'id': address.partner.id }) }} {% endif %}">{{ address.partner }}</a>                          
-                </td>
-                <td>{% if address.datCre %}{{ address.datCre|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if address.datUpd %}{{ address.datUpd|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <a class="btn btn-sm btn-info" href="{{ path('address_show', { 'id': address.id }) }}">
-                        <span class="glyphicon glyphicon-share"></span> Show
-                    </a>
+            </thead>
+            <tbody>
+            {% for address in addresses %}
+                <tr>
+                    <td><a href="{{ path('address_show', { 'id': address.id }) }}">{{ address.id }}</a></td>
+                    <td>{{ address.alias }}</td>
+                    <td>{{ address.street }}</td>
+                    <td>{{ address.no }}</td>
+                    <td>{{ address.city }}</td>
+                    <td>{{ address.country }}</td>
+                    <td>{{ address.email }}</td>
+                    <td>{{ address.phone }}</td>
+                    <td>
+                        <a href="{% if address.partner.id is defined %} {{ path('partner_show', { 'id': address.partner.id }) }} {% endif %}">{{ address.partner }}</a>
+                    </td>
+                    <td>{% if address.datCre %}{{ address.datCre|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{% if address.datUpd %}{{ address.datUpd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
+                        <a class="btn btn-sm btn-info" href="{{ path('address_show', { 'id': address.id }) }}">
+                            <span class="glyphicon glyphicon-share"></span> Show
+                        </a>
 
-                    <a class="btn btn-sm btn-default" href="{{ path('address_edit', { 'id': address.id }) }}">
-                        <span class="glyphicon glyphicon-edit"></span>Edit
-                    </a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
+                        <a class="btn btn-sm btn-default" href="{{ path('address_edit', { 'id': address.id }) }}">
+                            <span class="glyphicon glyphicon-edit"></span>Edit
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}

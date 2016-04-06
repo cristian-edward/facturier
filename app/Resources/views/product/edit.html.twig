@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
-{#{% form_theme edit_form ':Form:filds.html.twig' %}#}
+{% form_theme edit_form ':Form:filds.html.twig' %}
+
 {% block submenu %}
     <ul class="nav nav-sidebar">
         <li><a href="{{ path('product_new') }}">Add new</a></li>
@@ -10,7 +11,7 @@
 
     <h3>Product editing</h3>
 
-    {{ form_start(edit_form, {'attr': {'class': 'form-horizontal'}}) }}
+    {{ form_start(edit_form, { 'attr': { 'role':'form', 'class':'form-horizontal' }}) }}
     {{ form_errors(edit_form) }}
     <div class="row">
         <div class="col-lg-4">
@@ -66,7 +67,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-11">
             <div class="form-group">
                 <div class="wrap-playvideos">
                     <h3>Product features</h3>

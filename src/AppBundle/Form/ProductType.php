@@ -26,7 +26,7 @@ class ProductType extends AbstractType
             ->add('salePrice')
             ->add('unitMeasure')
             ->add('categories', EntityType::class, array(
-                'class'=>'AppBundle\Entity\Category',
+                'class'=>'AppBundle:Category',
                 'query_builder'=> function(EntityRepository $er){
                     return $er->createQueryBuilder('c')
                         ->orderBy('c.name', 'ASC');

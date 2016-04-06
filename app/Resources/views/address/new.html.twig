@@ -1,18 +1,17 @@
 {% extends 'base.html.twig' %}
 {% form_theme form ':Form:filds.html.twig' %}
 {% block submenu %}
-<ul class="nav nav-sidebar">
-    <li><a href="{{ path('address_new') }}">Add new</a></li>
-    <li><a href="{{ path('address_index') }}">List</a></li>
-</ul>
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('address_new') }}">Add new</a></li>
+        <li><a href="{{ path('address_index') }}">List</a></li>
+    </ul>
 {% endblock %}
-
 {% block body %}
     <h1>Address creation</h1>
 
-    {{ form_start(form, { 'attr': { 'role':'form', 'class':'form-horizontal' } }) }}
+    {{ form_start(form, { 'attr': { 'role':'form', 'class':'form-horizontal' }}) }}
 
-        {{ form_widget(form) }}
+    {{ form_widget(form) }}
 
     {{ form_end(form) }}
 

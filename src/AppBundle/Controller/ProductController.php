@@ -83,7 +83,10 @@ class ProductController extends Controller
     {
         $deleteForm = $this->createDeleteForm($product);
         $editForm = $this->createForm('AppBundle\Form\ProductType', $product);
-        $editForm->add('submit', SubmitType::class, ['label'=>'Trimite', 'attr'=>['class'=>'btn btn-primary']]);
+        $editForm->add('submit', SubmitType::class,
+            array('attr' => ['class'=>'btn btn-primary'],
+                'label'=>'Save',
+            ));
 
         $editForm->handleRequest($request);
 
@@ -132,7 +135,10 @@ class ProductController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('product_delete', array('id' => $product->getId())))
             ->setMethod('DELETE')
-            ->add('submit', SubmitType::class, ['label'=>'Trimite', 'attr'=>['class'=>'btn btn-danger']])
+            ->add('submit', SubmitType::class,[
+                'label'=>'Delete',
+                'attr'=>['class'=>'btn btn-danger'
+                ]])
             ->getForm()
         ;
     }

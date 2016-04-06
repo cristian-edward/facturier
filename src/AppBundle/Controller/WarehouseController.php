@@ -41,7 +41,10 @@ class WarehouseController extends Controller
     {
         $warehouse = new Warehouse();
         $form = $this->createForm('AppBundle\Form\WarehouseType', $warehouse);
-        $form->add('submit', SubmitType::class);
+        $form->add('submit', SubmitType::class,
+            array('attr' => ['class'=>'btn btn-primary'],
+                'label'=>'Trimite',
+            ));
         
         $form->handleRequest($request);
 
@@ -81,7 +84,10 @@ class WarehouseController extends Controller
     {
         $deleteForm = $this->createDeleteForm($warehouse);
         $editForm = $this->createForm('AppBundle\Form\WarehouseType', $warehouse);
-        $editForm->add('submit', SubmitType::class);        
+        $editForm->add('submit', SubmitType::class,
+            array('attr' => ['class'=>'btn btn-primary'],
+                'label'=>'Save',
+            ));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -129,7 +135,10 @@ class WarehouseController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('warehouse_delete', array('id' => $warehouse->getId())))
             ->setMethod('DELETE')
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class,[
+                'label'=>'Delete',
+                'attr'=>['class'=>'btn btn-danger'
+                ]])
             ->getForm()
         ;        
     }

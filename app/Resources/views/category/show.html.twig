@@ -1,54 +1,47 @@
 {% extends 'base.html.twig' %}
+{% form_theme delete_form ':Form:filds.html.twig' %}
 
 {% block submenu %}
     <ul class="nav nav-sidebar">
-        <li>
-            <a href="{{ path('category_new') }}">Add new</a>
-        </li>        
-        <li>
-            <a href="{{ path('category_index') }}">List</a>
-        </li>
-        <li>
-            <a href="{{ path('category_edit', { 'id': category.id }) }}">Edit</a>
-        </li>
-
+        <li><a href="{{ path('category_new') }}">Add new</a></li>
+        <li><a href="{{ path('category_index') }}">List</a></li>
+        <li><a href="{{ path('category_edit', { 'id': category.id }) }}">Edit</a></li>
     </ul>
 {% endblock %}
-
 {% block body %}
     <h1>Category Name</h1>
 
-<div class="col-lg-4">
-    <div class="table-responsive">   
-        <table class="table table-bordered table-hover record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <th>Category name value</th>
-                <td>{{ category.name }}</td>
-            </tr>
-            <tr>
-                <th>Creation date</th>
-                <td>{% if category.datCre %}{{ category.datCre|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Update date</th>
-                <td>{% if category.datUpd %}{{ category.datUpd|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
-
-    <div class="form-group">
-        {{ form_start(delete_form) }}
-        <div class="col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-2">
-           {{ form_widget(delete_form.submit, { 'label': 'Delete', 'attr': {'class': 'btn btn-sm btn-danger'}}) }}
+    <div class="col-lg-4">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover record_properties">
+                <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ category.id }}</td>
+                </tr>
+                <tr>
+                    <th>Category name value</th>
+                    <td>{{ category.name }}</td>
+                </tr>
+                <tr>
+                    <th>Creation date</th>
+                    <td>{% if category.datCre %}{{ category.datCre|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <th>Update date</th>
+                    <td>{% if category.datUpd %}{{ category.datUpd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
+
+
+        {{ form_start(delete_form, { 'attr': { 'role':'form', 'class':'form-horizontal' }}) }}
+
+        {{ form_widget(delete_form) }}
+
         {{ form_end(delete_form) }}
-    </div>        
-</div>            
+
+    </div>
 
 {% endblock %}

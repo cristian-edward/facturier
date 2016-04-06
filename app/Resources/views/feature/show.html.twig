@@ -32,7 +32,7 @@
             <a href="{{ path('feature_edit', { 'id': feature.id }) }}">Edit</a>
         </li>
         <li>
-            {{ form_start(delete_form) }}
+            {{ form_start(delete_form, { 'attr': { 'role':'form', 'class':'form-horizontal' }}) }}
                 <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
