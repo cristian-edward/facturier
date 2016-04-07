@@ -3,7 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * 
  * @UniqueEntity("reference")
  * @UniqueEntity("ean")
- * 
+ * @ORM\HasLifecycleCallbacks()
  * 
  */
 class Product
@@ -28,6 +28,14 @@ class Product
      * 
      */
     private $id;    
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nume", type="string")
+     * 
+     */
+    private $nume; 
     
     /**
      * @var integer
@@ -46,15 +54,14 @@ class Product
     
     /**
      * 
-     * @ORM\ManyToMany(targetEntity="Feature", inversedBy="products")
-     * 
+     * @ORM\ManyToMany(targetEntity="Feature", inversedBy="products", cascade={"persist"})
      * 
      */
     private $features;  
     
     /**
      * 
-     * @ORM\ManyToMany(targetEntity="ProductImage", mappedBy="products")
+     * @ORM\OneToMany(targetEntity="ProductImage", mappedBy="product", cascade={"persist"}))
      * 
      * 
      */
@@ -124,10 +131,10 @@ class Product
      */
     public function __construct()
     {
+        $this->features = new ArrayCollection();
         $this->categories = new ArrayCollection();
-        $this->features = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->productWarehouses = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->productWarehouses = new ArrayCollection();
     }
 
     /**
@@ -141,6 +148,29 @@ class Product
     }
 
     /**
+     * Set nume
+     *
+     * @param string $nume
+     *
+     * @return Product
+     */
+    public function setNume($nume)
+    {
+        $this->nume = $nume;
+        return $this;
+    }
+    
+    /**
+     * Get nume
+     *
+     * @return string
+     */
+    public function getNume()
+    {
+        return $this->nume;
+    }
+    
+    /**
      * Set manufacturer
      *
      * @param string $manufacturer
@@ -150,10 +180,9 @@ class Product
     public function setManufacturer($manufacturer)
     {
         $this->manufacturer = $manufacturer;
-
         return $this;
     }
-
+    
     /**
      * Get manufacturer
      *
@@ -174,7 +203,6 @@ class Product
     public function setEan($ean)
     {
         $this->ean = $ean;
-
         return $this;
     }
 
@@ -238,14 +266,14 @@ class Product
 
     /**
      * Set datCre
-     *
+     * @ORM\PrePersist
      * @param \DateTime $datCre
      *
      * @return Product
      */
     public function setDatCre($datCre)
     {
-        $this->datCre = $datCre;
+        $this->datCre = new \DateTime();
 
         return $this;
     }
@@ -262,14 +290,15 @@ class Product
 
     /**
      * Set datUpd
-     *
+     * @ORM\PreUpdate
+     * @ORM\PrePersist
      * @param \DateTime $datUpd
      *
      * @return Product
      */
     public function setDatUpd($datUpd)
     {
-        $this->datUpd = $datUpd;
+        $this->datUpd = new \DateTime();
 
         return $this;
     }
@@ -351,7 +380,7 @@ class Product
      */
     public function addFeature(\AppBundle\Entity\Feature $feature)
     {
-        $this->features[] = $feature;
+        $this->features->add($feature);
 
         return $this;
     }
@@ -385,9 +414,11 @@ class Product
      */
     public function addImage(\AppBundle\Entity\ProductImage $image)
     {
-        $this->images[] = $image;
+        
+        $image->setProduct($this);
+        
+        $this->images->add($image);
 
-        return $this;
     }
 
     /**

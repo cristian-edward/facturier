@@ -6,6 +6,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Entity\Partner;
 use AppBundle\Form\PartnerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Partner controller.
@@ -35,12 +38,10 @@ class PartnerController extends Controller
     public function newAction(Request $request)
     {
         $partner = new Partner();
-        $form = $this->createForm(PartnerType::class, $partner, [
-            'method' => 'GET',    /* Set form method */
-            'action' => $this->generateUrl('partner_new'),
-        ]);
+        $form = $this->createForm('AppBundle\Form\PartnerType', $partner);
+        $form->add('submit', SubmitType::class);
         $form->handleRequest($request);
-
+              
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($partner);
@@ -77,6 +78,8 @@ class PartnerController extends Controller
     {
         $deleteForm = $this->createDeleteForm($partner);
         $editForm = $this->createForm('AppBundle\Form\PartnerType', $partner);
+
+        $editForm->add('submit', SubmitType::class); 
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -84,7 +87,8 @@ class PartnerController extends Controller
             $em->persist($partner);
             $em->flush();
 
-            return $this->redirectToRoute('partner_edit', array('id' => $partner->getId()));
+            return $this->redirectToRoute('partner_show', array('id' => $partner->getId()));
+
         }
 
         return $this->render('partner/edit.html.twig', array(
@@ -124,6 +128,7 @@ class PartnerController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('partner_delete', array('id' => $partner->getId())))
             ->setMethod('DELETE')
+            ->add('submit', SubmitType::class)
             ->getForm()
         ;
     }

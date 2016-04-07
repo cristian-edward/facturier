@@ -3,7 +3,6 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,11 +18,6 @@ class PartnerType extends AbstractType
             ->add('name')
             ->add('bank')
             ->add('iban')
-
- //           ->add('datUpd', 'date', array(
- //               'widget'
- //           ))
-//            ->add('datCre', 'datetime')
         ;
     }
     

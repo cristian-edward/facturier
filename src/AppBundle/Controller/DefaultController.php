@@ -14,24 +14,82 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        /* * sa generam un array de test * */ 
-        for($i=0;$i<=30;$i++){ 
-            for($j=0;$j<8;$j++){ 
-            $rez[$i][] ="text $i,$j"; 
-            } 
+        /*
+         * sa generam un array de test
+         * 
+         */ 
+        for($i=0;$i<30;$i++){
+            for($j=0;$j<10;$j++){                
+                $rez[$i][] ="text $i,$j";                
+            }
         }
-        
-        $capTabel = ['Partner id', 'Alias', 'Street', 'Number', 'City', 'Country', 'Phone', 'Email' ];
-        
-        
-        return $this->render('default/index.html.twig', array( 'entities' => $rez, 'capTabel' => $capTabel));
-        
+
+        return $this->render('default/index.html.twig', array(
+            'entities' => $rez,
+        ));
     }
     
+    /**
+     * @Route("/raspuns/html", name="default_raspuns")
+     * 
+     */
+    public function raspunsHtmlAction()
+    {
+        $number = rand(0, 100);
+ 
+        $res = new Response(
+            '<html><body>Acesta este numarul generat: '.$number.'</body></html>'
+        );
+        
+        return $res;
+    }    
+    
+    /**
+     * @Route("/raspuns/json/{numar}")
+     */
+    public function raspunsJsonAction($numar)
+    {
+        $data = array();
+        for ($i = 1; $i <= $numar; $i++) {
+            $data['numar_generat'.$i] = rand(0, 100);
+        }
+ 
+        return new Response(
+            json_encode($data),
+            200,
+            array('Content-Type' => 'application/json')
+        );
+    }  
+    
 
+    public function raspunsHtmlMvcAction()
+    {
+        $number = rand(0, 100);
+ 
+        $res = $this->render(
+            'Default/raspunsHtml.html.twig',
+            array('number' => $number)
+        );
+        
+        return $res;
+    }      
     
-    
-    
-    
-    
-}   // end DefaultController
+
+    public function flashMsgExAction($numar)
+    {
+        $data = array();
+        for ($i = 1; $i <= $numar; $i++) {
+            $data['numar_generat'.$i] = rand(0, 100);
+        }
+ 
+        $this->addFlash(
+            'notice',
+            'Sunt afisat numai in raspunul acesta!'
+        );
+        
+        return $this->render(
+            'Default/flashEx.html.twig',
+            array('res' => $data)
+        );
+    }      
+}
