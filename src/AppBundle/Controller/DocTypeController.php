@@ -39,7 +39,10 @@ class DocTypeController extends Controller
     {
         $docType = new DocType();
         $form = $this->createForm('AppBundle\Form\DocTypeType', $docType);
-        $form->add('submit', SubmitType::class);
+        $form->add('submit', SubmitType::class,
+            array('attr' => ['class'=>'btn btn-primary'],
+                'label'=>'Trimite',
+            ));
 
         $form->handleRequest($request);
 
@@ -79,7 +82,10 @@ class DocTypeController extends Controller
     {
         $deleteForm = $this->createDeleteForm($docType);
         $editForm = $this->createForm('AppBundle\Form\DocTypeType', $docType);
-        $editForm->add('submit', SubmitType::class, ['label'=>'Trimite', 'attr'=>['class'=>'btn btn-primary']]);
+        $editForm->add('submit', SubmitType::class,
+            array('attr' => ['class'=>'btn btn-primary'],
+                'label'=>'Save',
+            ));
 
         $editForm->handleRequest($request);
 
@@ -128,7 +134,10 @@ class DocTypeController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('doctype_delete', array('id' => $docType->getId())))
             ->setMethod('DELETE')
-            ->add('submit', SubmitType::class, ['label'=>'Trimite', 'attr'=>['class'=>'btn btn-primary']])
+            ->add('submit', SubmitType::class,[
+                'label'=>'Delete',
+                'attr'=>['class'=>'btn btn-danger'
+                ]])
             ->getForm()
         ;
     }

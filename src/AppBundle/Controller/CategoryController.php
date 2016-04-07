@@ -41,7 +41,10 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $form = $this->createForm('AppBundle\Form\CategoryType', $category);
-        $form->add('submit', SubmitType::class);
+        $form->add('submit', SubmitType::class,
+            array('attr' => ['class'=>'btn btn-primary'],
+                'label'=>'Trimite',
+            ));
         
         $form->handleRequest($request);
 
@@ -81,7 +84,10 @@ class CategoryController extends Controller
     {
         $deleteForm = $this->createDeleteForm($category);
         $editForm = $this->createForm('AppBundle\Form\CategoryType', $category);
-        $editForm->add('submit', SubmitType::class);        
+        $editForm->add('submit', SubmitType::class,
+            array('attr' => ['class'=>'btn btn-success'],
+                'label'=>'Save',
+            ));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -95,7 +101,7 @@ class CategoryController extends Controller
         return $this->render('category/edit.html.twig', array(
             'category' => $category,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            #'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -129,7 +135,10 @@ class CategoryController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('category_delete', array('id' => $category->getId())))
             ->setMethod('DELETE')
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class,[
+                'label'=>'Delete',
+                'attr'=>['class'=>'btn btn-danger'
+                ]])
             ->getForm()
         ;        
     }

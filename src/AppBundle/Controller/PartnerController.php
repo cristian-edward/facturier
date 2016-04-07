@@ -39,7 +39,10 @@ class PartnerController extends Controller
     {
         $partner = new Partner();
         $form = $this->createForm('AppBundle\Form\PartnerType', $partner);
-        $form->add('submit', SubmitType::class);
+        $form->add('submit', SubmitType::class,
+            array('attr' => ['class'=>'btn btn-primary'],
+                'label'=>'Trimite',
+            ));
         $form->handleRequest($request);
               
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,7 +82,10 @@ class PartnerController extends Controller
         $deleteForm = $this->createDeleteForm($partner);
         $editForm = $this->createForm('AppBundle\Form\PartnerType', $partner);
 
-        $editForm->add('submit', SubmitType::class); 
+        $editForm->add('submit', SubmitType::class,
+            array('attr' => ['class'=>'btn btn-primary'],
+                'label'=>'Save',
+            ));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -128,7 +134,10 @@ class PartnerController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('partner_delete', array('id' => $partner->getId())))
             ->setMethod('DELETE')
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class,[
+                'label'=>'Delete',
+                'attr'=>['class'=>'btn btn-danger'
+                ]])
             ->getForm()
         ;
     }

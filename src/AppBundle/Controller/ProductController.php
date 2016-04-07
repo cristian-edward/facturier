@@ -13,6 +13,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
+
 /**
  * Product controller.
  *
@@ -42,14 +43,19 @@ class ProductController extends Controller
     {
         $product = new Product();
         $form = $this->createForm('AppBundle\Form\ProductType', $product);
-        $form->add('submit', SubmitType::class);
+        $form->add('submit', SubmitType::class,
+            array('attr' => ['class'=>'btn btn-primary'],
+                  'label'=>'Trimite',
+                )
+            );
+
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            
             $em->persist($product);
-            
+
             $em->flush();
 
             return $this->redirectToRoute('product_show', array('id' => $product->getId()));
@@ -82,35 +88,36 @@ class ProductController extends Controller
     public function editAction(Request $request, Product $product)
     {
         $origImages = new ArrayCollection();
-        
+
         // Create an ArrayCollection of the current Tag objects in the database
         foreach ($product->getImages() as $image) {
-           $origImages->add($image);
-        }     
-    
+            $origImages->add($image);
+        }
+
         //$deleteForm = $this->createDeleteForm($product);
         $editForm = $this->createForm('AppBundle\Form\ProductType', $product);
-        $editForm->add('submit', SubmitType::class);
+        $editForm->add('submit', SubmitType::class, array(
+            'attr'=>array(
+                #'class'=>'btn btn-primary',
+                'label'=>'Trimite',
+            ),
+        ));
         $editForm->handleRequest($request);
-        
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            
+
             // remove the relationship between the tag and the Task
             foreach ($origImages as $image) {
                 if (false === $product->getImages()->contains($image)) {
-
                     $em->remove($image);
                 }
             }
-            
+
             $em->persist($product);
             $em->flush();
-
             return $this->redirectToRoute('product_edit', array('id' => $product->getId()));
         }
-
         return $this->render('product/edit.html.twig', array(
             'product' => $product,
             'form' => $editForm->createView(),
@@ -128,13 +135,14 @@ class ProductController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
             // Create an ArrayCollection of the current Tag objects in the database
             if($product->getImages()){
                 foreach ($product->getImages() as $image) {
                     $em->remove($image);
                 }   
             }
-          
+
             $em->remove($product);
             $em->flush();
         }
@@ -154,6 +162,10 @@ class ProductController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('product_delete', array('id' => $product->getId())))
             ->setMethod('DELETE')
+            ->add('submit', SubmitType::class,[
+                'label'=>'Delete',
+                'attr'=>['class'=>'btn btn-danger'
+                ]])
             ->getForm()
         ;
     }

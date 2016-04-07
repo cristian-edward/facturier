@@ -7,6 +7,9 @@ var $addTagLink_image = $('<a href="#" class="btn btn-sm btn-default add_tag_lin
 var $newLinkLi = $('<li class="kta_feature"></li>').append($addTagLink);
 var $newLinkLi_image = $('<li class="kta_image"></li>').append($addTagLink_image);
 
+
+
+
 function addTagForm($collectionHolder, $newLinkLi) {
     // Get the data-prototype explained earlier
     var prototype = $collectionHolder.data('prototype');
@@ -27,6 +30,7 @@ function addTagForm($collectionHolder, $newLinkLi) {
 
     // add a delete link to the new form
     addTagFormDeleteLink($newFormLi);    
+
 }
 
 function addTagFormDeleteLink($tagFormLi) {
@@ -34,11 +38,13 @@ function addTagFormDeleteLink($tagFormLi) {
     $tagFormLi.append($removeFormA);
 
     $removeFormA.on('click', function(e) {
-    // prevent the link from creating a "#" on the URL
-    e.preventDefault();
 
-    // remove the li for the tag form
-    $tagFormLi.remove();
+        // prevent the link from creating a "#" on the URL
+        e.preventDefault();
+
+        // remove the li for the tag form
+        $tagFormLi.remove();
+
     });
 }
 
@@ -46,11 +52,13 @@ $(document).ready(function(){
 
     // add active class to 'clicked' links from sidebar
     $(".sidebar ul > li").click(function () {
+
        $('ul > li').removeClass('active'); 
        $(this).addClass('active');   
 
     });
     //end 
+
 
     //////// code used to Embed a Collection of Forms Playlists emdeb with Playvideos
 
@@ -68,6 +76,7 @@ $(document).ready(function(){
     $collectionHolder_image.data('index', $collectionHolder_image.find(':input').length);
 
     $addTagLink.on('click', function(e) {
+
     // prevent the link from creating a "#" on the URL
     e.preventDefault();
 
@@ -92,3 +101,4 @@ $(document).ready(function(){
     //////// end of code used to Embed a Collection of Forms Playlists emdeb with Playvideos
 
 });    
+

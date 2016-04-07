@@ -42,7 +42,10 @@ class AddressController extends Controller
         $address = new Address();
         $form = $this->createForm('AppBundle\Form\AddressType', $address);
         /* Adaug aici butonul de submit */
-        $form->add('submit', SubmitType::class);
+        $form->add('submit', SubmitType::class,
+            array('attr' => ['class'=>'btn btn-primary'],
+                'label'=>'Trimite',
+            ));
 
         $form->handleRequest($request);
 
@@ -83,7 +86,10 @@ class AddressController extends Controller
         $deleteForm = $this->createDeleteForm($address);
         $editForm = $this->createForm('AppBundle\Form\AddressType', $address);
         /* Adaug aici butonul de submit */
-        $editForm->add('submit', SubmitType::class, ['label'=>'Trimite', 'attr'=>['class'=>'btn btn-primary']]);
+        $editForm->add('submit', SubmitType::class,
+            array('attr' => ['class'=>'btn btn-success'],
+                'label'=>'Save',
+            ));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -131,7 +137,10 @@ class AddressController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('address_delete', array('id' => $address->getId())))
             ->setMethod('DELETE')
-            ->add('submit', SubmitType::class, ['label'=>'Delete', 'attr'=>['class'=>'btn btn-primary']])
+            ->add('submit', SubmitType::class, [
+                'label'=>'Delete',
+                'attr'=>['class'=>'btn btn-danger'
+                ]])
             ->getForm()
         ;
     }

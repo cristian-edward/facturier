@@ -15,11 +15,14 @@ class FeatureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('value')
-          //  ->add('datCre', 'datetime')
-            //->add('datUpd', 'datetime')
+
+
+           //->add('datCre', 'datetime')
+           // ->add('datUpd', 'datetime')
             //->add('products')
             ->add('name')
+            ->add('value')
+
         ;
     }
     
@@ -32,6 +35,7 @@ class FeatureType extends AbstractType
             'data_class' => 'AppBundle\Entity\Feature'
         ));
     }
+
     
     /**
      * @return string
@@ -40,4 +44,5 @@ class FeatureType extends AbstractType
     {
         return 'feature';
     }    
+
 }
