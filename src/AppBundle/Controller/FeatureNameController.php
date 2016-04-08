@@ -120,7 +120,7 @@ class FeatureNameController extends Controller
         return $this->render('featurename/edit.html.twig', array(
             'featureName' => $featureName,
             'edit_form' => $editForm->createView(),
-           # 'delete_form' => $deleteForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 

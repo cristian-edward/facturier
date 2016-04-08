@@ -1,4 +1,5 @@
 {% extends 'product/product_layout.html.twig' %}
+{% form_theme form ':Form:filds.html.twig' %}
 
 {% block submenu %}
     {{ parent() }}
@@ -6,10 +7,6 @@
         <li><a href="{{ path('product_new') }}">Add new</a></li>
         <li><a href="{{ path('product_index') }}">List</a></li>
     </ul>
-{% endblock %}
-{% block javascript %}
-    {{ parent() }}
-    <script type="text/javascript" src="{{ asset('js/facturier.js') }}"></script>
 {% endblock %}
 {% block body -%}
 
@@ -71,21 +68,21 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-12">
             <div class="form-group">
                 <div class="wrap-playvideos">
                     <h3>Product features</h3>
                     <ul class="features" data-prototype="{{ form_widget(form.features.vars.prototype)|e }}">
-                        {% for feature in form.features %}
-                            <li>{{ form_widget(feature) }}</li>
-                        {% endfor %}
+                        {#{% for feature in form.features %}#}
+                            <li>{{ form_widget(form.features) }}</li>
+                        {#{% endfor %}#}
                     </ul>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-12">
             <div class="form-group">
 
                 <div class="wrap-playvideos">
@@ -93,9 +90,9 @@
                     <h3>Product images</h3>
                     <ul class="images" data-prototype="{{ form_widget(form.images.vars.prototype)|e }}">
 
-                    {% for image in form.images %}
-                    <li>{{ form_widget(image) }}</li>
-                    {% endfor %}
+                    {#{% for image in form.images %}#}
+                    <li>{{ form_widget(form.images) }}</li>
+                    {#{% endfor %}#}
                     </ul>
                 </div>
             </div>
