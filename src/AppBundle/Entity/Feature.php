@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Feature
@@ -47,7 +48,22 @@ class Feature
      * @ORM\Column(name="f_value", type="string", nullable=true)
      */
     private $value;
-     
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="date_cre", type="datetime")
+     * @Assert\DateTime()
+     */
+    private $datCre;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="date_upd", type="datetime")
+     * @Assert\DateTime()
+     */
+    private $datUpd;
     
     /**
      * 
@@ -106,7 +122,7 @@ class Feature
      *
      * @return Feature
      */
-    public function setDatCre($datCre)
+    public function setDatCre()
     {
         $this->datCre = new \DateTime();
 
@@ -131,7 +147,7 @@ class Feature
      *
      * @return Feature
      */
-    public function setDatUpd($datUpd)
+    public function setDatUpd()
     {
         $this->datUpd = new \DateTime();
 

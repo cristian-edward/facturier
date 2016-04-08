@@ -1,5 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends 'product/product_layout.html.twig' %}
 {% block submenu %}
+    {{ parent() }}
     <ul class="nav nav-sidebar">
         <li><a href="{{ path('product_new') }}">Add new</a></li>
         <li><a href="{{ path('product_index') }}">List</a></li>

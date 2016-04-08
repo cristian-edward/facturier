@@ -98,7 +98,7 @@ class ProductController extends Controller
         $editForm = $this->createForm('AppBundle\Form\ProductType', $product);
         $editForm->add('submit', SubmitType::class, array(
             'attr'=>array(
-                #'class'=>'btn btn-primary',
+                'class'=>'btn btn-primary',
                 'label'=>'Trimite',
             ),
         ));
