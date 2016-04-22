@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% trans_default_domain 'AppBundle' %}
+
+{% block submenu %}
+    {{  parent() }}
+    <hr />
+    <ul class="nav nav-sidebar">
+        <li><a href="{{ path('productlang_new') }}">{% trans %}Add new{% endtrans %}</a></li>
+        <li><a href="{{ path('productlang_index') }}">{% trans %}List{% endtrans %}</a></li>
+    </ul>
+{% endblock %}
+{% block body %}
+    <h1>ProductLang list</h1>
+
+<div class="table-responsive">
+    <table class="table table-hover records_list">
+        <thead>
+            <tr>
+                <th>{% trans %}Id{% endtrans %}</th>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <th>{% trans %}Lang{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for productLang in productLangs %}
+            <tr>
+                <td><a href="{{ path('productlang_show', { 'id': productLang.id }) }}">{{ productLang.id }}</a></td>
+                <td>{{ productLang.name }}</td>
+                <td>{{ productLang.lang }}</td>
+                <td>
+                    <ul>
+                        <a class="btn btn-sm btn-info" href="{{ path('productlang_show', { 'id': productLang.id }) }}">
+                            <span class="glyphicon glyphicon-share"></span> Show
+                        </a>
+
+                        <a class="btn btn-sm btn-default" href="{{ path('productlang_edit', { 'id': productLang.id }) }}">
+                            <span class="glyphicon glyphicon-edit"></span>Edit
+                        </a>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

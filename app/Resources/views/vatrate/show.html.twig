@@ -44,7 +44,7 @@
     </table>
 </div>
 
-            {{ form_start(delete_form) }}
+            {{ form_start(delete_form, {'attr': {'role':'form', 'class':'form-horizontal'}}) }}
                 {{ form_widget(delete_form) }}
             {{ form_end(delete_form) }}
 

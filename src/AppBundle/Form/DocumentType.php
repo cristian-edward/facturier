@@ -10,6 +10,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 
+
+
+
+
 class DocumentType extends AbstractType
 {
     /**
@@ -39,6 +43,12 @@ class DocumentType extends AbstractType
                 'translation_domain'=>'AppBundle',
                 'placeholder'=>'Choose a payment type',
             ))
+            ->add('warehouse', EntityType::class, array(
+                'class'=>'AppBundle:Warehouse',
+                'mapped' => false,
+                'translation_domain'=>'AppBundle',
+                
+            ))
             //->add('user')
             ->add('docStatus', EntityType::class, array(
                 'class'=>'AppBundle:DocStatus',
@@ -48,11 +58,11 @@ class DocumentType extends AbstractType
             ->add('documentLines', CollectionType::class, array(
                 'entry_type'   => DocumentLineType::class,
                 'allow_add'    => true,
+                'allow_delete' => true,
                 'label'        => false,
                 'by_reference' => false,
                 'translation_domain'=>'AppBundle',
-
-        ))                
+            ))                
         ;
     }
     

@@ -12,4 +12,11 @@
 /web/bundles/
 /.idea/*
 /web/uploads/*
+<<<<<<< HEAD
 /invoices/*
+=======
+/invoices/
+/nbproject/*
+/web/uploads/*
+
+>>>>>>> 637ace1e20e37b9371369e9781f8d394c7d36001
