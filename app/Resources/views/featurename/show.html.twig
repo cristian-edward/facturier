@@ -23,9 +23,17 @@
                 <td>{{ featureName.id }}</td>
             </tr>
             <tr>
-                <th>{% trans %}Feature name value{% endtrans %}</th>
-                <td>{{ featureName.fnValue }}</td>
+                <th>{% trans %}Feature name en{% endtrans %}</th>
+                <td>{{ featureName.en }}</td>
             </tr>
+            <tr>
+                <th>{% trans %}Feature name ro{% endtrans %}</th>
+                <td>{{ featureName.ro }}</td>
+            </tr>      
+            <tr>
+                <th>{% trans %}Feature name bg{% endtrans %}</th>
+                <td>{{ featureName.bg }}</td>
+            </tr>            
             <tr>
                 <th>{% trans %}Creation date{% endtrans %}</th>
                 <td>{% if featureName.datCre %}{{ featureName.datCre|date('Y-m-d H:i:s') }}{% endif %}</td>

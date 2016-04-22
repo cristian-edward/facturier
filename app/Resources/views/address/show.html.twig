@@ -19,49 +19,49 @@
         <table class="table table-bordered table-hover record_properties">
             <tbody>
                 <tr>
-                    <th>Id</th>
+                    <th>{% trans %}Id{% endtrans %}</th>
                     <td>{{ address.id }}</td>
                 </tr>
                 <tr>
-                    <th>Alias</th>
+                    <th>{% trans %}Alias{% endtrans %}</th>
                     <td>{{ address.alias }}</td>
                 </tr>
                 <tr>
-                    <th>Street</th>
+                    <th>{% trans %}Street{% endtrans %}</th>
                     <td>{{ address.street }}</td>
                 </tr>
                 <tr>
-                    <th>No</th>
+                    <th>{% trans %}Number{% endtrans %}</th>
                     <td>{{ address.no }}</td>
                 </tr>
                 <tr>
-                    <th>City</th>
+                    <th>{% trans %}City{% endtrans %}</th>
                     <td>{{ address.city }}</td>
                 </tr>
                 <tr>
-                    <th>Country</th>
+                    <th>{% trans %}Country{% endtrans %}</th>
                     <td>{{ address.country }}</td>
                 </tr>
                 <tr>
-                    <th>Email</th>
+                    <th>{% trans %}Email{% endtrans %}</th>
                     <td>{{ address.email }}</td>
                 </tr>
                 <tr>
-                    <th>Phone</th>
+                    <th>{% trans %}Phone{% endtrans %}</th>
                     <td>{{ address.phone }}</td>
                 </tr>
                 <tr>
-                    <th>Partner</th>
+                    <th>{% trans %}Partner{% endtrans %}</th>
                     <td>
                         <a href="{% if address.partner.id is defined %} {{ path('partner_show', { 'id': address.partner.id }) }} {% endif %}">{{ address.partner }}</a>
                     </td>
                 </tr>
                 <tr>
-                    <th>Datcre</th>
+                    <th>{% trans %}Datcre{% endtrans %}</th>
                     <td>{% if address.datCre %}{{ address.datCre|date('Y-m-d H:i:s') }}{% endif %}</td>
                 </tr>
                 <tr>
-                    <th>Datupd</th>
+                    <th>{% trans %}Datupd{% endtrans %}</th>
                     <td>{% if address.datUpd %}{{ address.datUpd|date('Y-m-d H:i:s') }}{% endif %}</td>
                 </tr>
             </tbody>

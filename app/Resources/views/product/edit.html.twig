@@ -11,6 +11,7 @@
         <li><a href="{{ path('product_edit', {'id':product.id}) }}">{% trans %}Edit{% endtrans %}</a></li>
     </ul>
 {% endblock %}
+
 {% block body -%}   
 
     <h3>Product editing</h3>
@@ -20,14 +21,7 @@
     <div class="row">
         <div class="col-lg-4">
             <div class="form-group">
-                {{ form_label(form.nume, 'Nume', {'label_attr': {'class': 'col-lg-4 control-label'}}) }}
-                {{ form_errors(form.nume) }}
-                <div class="col-lg-8">
-                    {{ form_widget(form.nume, {'attr': {'class': 'form-control'}}) }}
-                </div>
-            </div>
-            <div class="form-group">
-                {{ form_label(form.unitMeasure, 'Unitate de masura', {'label_attr': {'class': 'col-lg-4 control-label'}}) }}
+                {{ form_label(form.unitMeasure, 'Unit measure', {'label_attr': {'class': 'col-lg-4 control-label'}}) }}
                 {{ form_errors(form.unitMeasure) }}
                 <div class="col-lg-8">
                     {{ form_widget(form.unitMeasure, {'attr': {'class': 'form-control'}}) }}
@@ -83,7 +77,21 @@
                 </div>
             </div>
         </div> 
-    </div>   
+    </div> 
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <div class="wrap-playvideos">
+                    <h3>Product name</h3>
+                    <ul class="productlangs" data-prototype="{{ form_widget(form.productLangs.vars.prototype)|e }}">
+                        {% for productLang in form.productLangs %}
+                            <li >{{ form_widget(productLang) }}</li>
+                        {% endfor %}
+                    </ul>           
+                </div>
+            </div>
+        </div> 
+    </div>                     
     <div class="row">
         <div class="col-lg-12">
             <div class="form-group">
@@ -102,13 +110,21 @@
             <div class="col-lg-4">                 
                 <div class="form-group">
                     <div class="col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-2">
-                        {{ form_widget(form.submit, { 'label': 'Add', 'attr': {'class': 'btn btn-sm btn-success'}}) }}
+                        {{ form_widget(form.submit, { 'label': 'Edit', 'attr': {'class': 'btn btn-success'}}) }}
                     </div>
                 </div>                       
             </div>
        </div>
+        {{ form_widget(form.features) }}
+        {{ form_widget(form.productLangs) }}
+        {{ form_widget(form.images) }}                    
 
 {{ form_end(form) }} 
 
 
 {% endblock %}
+ {% block javascript %}
+     {{ parent() }}
+     <script type="text/javascript" src="{{ asset('js/product.js') }}"></script>    
+     
+{% endblock %}   
