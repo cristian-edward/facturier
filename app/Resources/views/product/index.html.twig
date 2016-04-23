@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                {% for product in products %}
+                {#{% for product in products %}
                     <tr>
                         <td><a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
                         <td>{{ product.manufacturer }}</td>
@@ -40,6 +40,40 @@
                                 <span class="glyphicon glyphicon-edit"></span> Edit</a>
                         </td>
                     </tr>
+                {% endfor %}#}
+                {% for entity in entities %}
+                    <tr>
+                        <td><a href="{{ path('product_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                        <td>{{ entity.manufacturer }}</td>
+                        <td>{{ entity.ean }}</td>
+                        <td>{{ entity.reference }}</td>
+                        <td>{{ entity.salePrice }}</td>
+                        <td>{{ entity.productLangs[0].name }}</td>
+                        <td>
+                            {% for feature in entity.features %}
+                                {% if feature.name[lang] is defined %}
+                                    {{ feature.name[lang] ~ ' - ' ~ feature[lang] }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {#{% for warehouse in entities.productWarehouses %}
+                                {% if warehouse is defined %}
+                                    {{ warehouse.warehouse.name }}
+                                {% endif %}
+                            {% endfor %}#}
+                        </td>
+
+                        {#<td>{{ dump(entity) }}</td>#}
+                        <td>
+                            <a class="btn btn-sm btn-info" href="{{ path('product_show', { 'id': entity.id }) }}">
+                                <span class="glyphicon glyphicon-share"></span> Show</a>
+
+                            <a class="btn btn-sm btn-default" href="{{ path('product_edit', { 'id': entity.id }) }}">
+                                <span class="glyphicon glyphicon-edit"></span> Edit</a>
+                        </td>
+                    </tr>
+
                 {% endfor %}
                 </tbody>
             </table>

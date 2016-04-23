@@ -26,17 +26,37 @@ class ProductController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $lang=$this->get('translator')->getLocale();
+        $qb = $em->createQueryBuilder();
+        $qb -> select(array('p','pw','f','fn','pl','pwa'))
+            ->from('AppBundle:Product', 'p')
+            ->leftJoin('p.productWarehouses', 'pw')
+            ->leftJoin('pw.warehouse', 'pwa')
+            ->leftJoin('p.features', 'f')
+            ->leftJoin('f.name', 'fn')
+            ->leftJoin('p.productLangs', 'pl')
+            ->andWhere($qb->expr()->eq('pl.lang', '?1'))
+            //->andWhere($qb->expr()->eq('fn.lang', '?2'))
+            ->orderBy('pl.name', 'DESC')
+            ->setParameter(1, $lang)
+            //->setParameter(2, $lang)
+            ->setMaxResults(100);
+
+        $entities  = $qb->getQuery()->getArrayResult();
 
         /* numele coloanelor din baza de date */
         $mapping = $this->getDoctrine()->getManager()->getClassMetadata('AppBundle:Product');
         $columns = $mapping->getFieldNames();
 
-        $products = $em->getRepository('AppBundle:Product')->findAll();
-
         return $this->render('product/index.html.twig', array(
-            'products' => $products,
             'columns'  => $columns,
+            'entities' => $entities,
+            'lang' => $lang
         ));
+
+
+
+
     }
 
     /**

@@ -48,7 +48,7 @@ class ProductWarehouse
     /**
      * @var integer
      *
-     * @ORM\Column(name="quantity", type="integer")
+     * @ORM\Column(name="quantity", type="integer", nullable=true)
      * @Assert\Regex(
      *     pattern="/^[\d+]+$/",
      *     match=true,
